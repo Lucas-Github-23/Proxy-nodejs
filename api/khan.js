@@ -1,7 +1,7 @@
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const proxy = createProxyMiddleware({
-    target: 'https://www.khanacademy.org',
+    target: 'https://www.redacao.pr.gov.br',
     changeOrigin: true,
     pathRewrite: { '^/api/khan': '' },
     onProxyRes: (proxyRes) => {

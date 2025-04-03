@@ -7,11 +7,11 @@ app.use(cors()); // Habilita requisições de qualquer origem
 
 // Proxy para a Khan Academy
 app.use('/khan', createProxyMiddleware({
-    target: 'https://www.khanacademy.org',
+    target: 'https://www.redacao.pr.gov.br',
     changeOrigin: true,
     headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-        'Referer': 'https://www.khanacademy.org',
+        'Referer': 'https://www.redacao.pr.gov.br',
     },
     onProxyRes: (proxyRes) => {
         delete proxyRes.headers['x-frame-options'];

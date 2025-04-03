@@ -3,21 +3,17 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const cors = require('cors');
 
 const app = express();
-app.use(cors()); // Habilita requisições de qualquer origem
+app.use(cors()); // Permite requisições de qualquer origem
 
-// Proxy para a Khan Academy
-app.use('/khan', createProxyMiddleware({
-    target: 'https://www.redacao.pr.gov.br',
+// Proxy para redacao.pr.gov.br
+app.use('/redacao', createProxyMiddleware({
+    target: 'https://redacao.pr.gov.br',
     changeOrigin: true,
-    headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-        'Referer': 'https://www.redacao.pr.gov.br',
-    },
     onProxyRes: (proxyRes) => {
         delete proxyRes.headers['x-frame-options'];
         delete proxyRes.headers['content-security-policy'];
     },
-    pathRewrite: { '^/khan': '' },
+    pathRewrite: { '^/redacao': '' }, // Remove "/redacao" da URL final
 }));
 
 app.listen(3000, () => {
